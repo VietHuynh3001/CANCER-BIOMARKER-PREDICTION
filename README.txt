@@ -1,4 +1,4 @@
-# 1.INTRODUCTION
+<b>1.INTRODUCTION</b>
 NOTE: THIS PROJECT IS THE REPLICATION WORK OF "Ahmed, Yaman B et al. “Genomic and Transcriptomic 
 Predictors of Response to Immune Checkpoint Inhibitors in Melanoma Patients: A Machine Learning 
 Approach.” Cancers vol. 14,22 5605. 15 Nov. 2022, doi:10.3390/cancers14225605". THE PROJECT SERVES AS A HANDS-ON 
@@ -23,4 +23,5 @@ EXERCISE TO DEEPEN MY KNOWLEDGE IN BIOINFORMATICS AND MACHINE LEARNING APPLICATI
 +4.DEA_results/: Output files generated from Differential Expression Analysis.
 
 +5.xcell_results/: Results from the immune response analysis (xCell).
-# 2.RESULTS:
+<b>2.RESULTS:</b>
+
