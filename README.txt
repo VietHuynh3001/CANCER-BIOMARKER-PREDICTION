@@ -1,4 +1,4 @@
-
+# 1.INTRODUCTION
 NOTE: THIS PROJECT IS THE REPLICATION WORK OF "Ahmed, Yaman B et al. “Genomic and Transcriptomic 
 Predictors of Response to Immune Checkpoint Inhibitors in Melanoma Patients: A Machine Learning 
 Approach.” Cancers vol. 14,22 5605. 15 Nov. 2022, doi:10.3390/cancers14225605". THE PROJECT SERVES AS A HANDS-ON 
@@ -21,4 +21,6 @@ EXERCISE TO DEEPEN MY KNOWLEDGE IN BIOINFORMATICS AND MACHINE LEARNING APPLICATI
 +2.Preprocessed_data/: Processed data for GSE78220 and GSE91061, along with input files for immune response analysis.
 +3.Top_genes_SVM_RFE/: Stores pickle files for the top 4 up-regulated, top 4 down-regulated, and top 100 genes.
 +4.DEA_results/: Output files generated from Differential Expression Analysis.
+
 +5.xcell_results/: Results from the immune response analysis (xCell).
+# 2.RESULTS:
