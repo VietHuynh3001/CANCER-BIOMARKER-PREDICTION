@@ -29,6 +29,7 @@ The primary objective of this analysis is to identify genes exhibiting significa
 
 ## 3.2. Gene Ontology Enrichment Analysis
 The primary objective of this analysis was to decode the biological significance of the identified `1,540` DEGs by categorizing them into three functional domains: Biological Process (BP), Cellular Component (CC), and Molecular Function (MF). By mapping these genes to established Gene Ontology terms, the study aims to ensure that the candidate features selected for the subsequent machine learning models carry relevant biological signals, particularly those associated with the mechanisms of anti-tumor immunity and immunotherapy response.
+
 The analysis of up-regulated genes reveals a robust enrichment in pathways critical for a favorable response to immune checkpoint inhibitors. In the Biological Process domain, there is a strong focus on lymphocyte activation and immune response signaling, achieving high statistical significance with $-log_{10}FDR$ values exceeding 12.5. Regarding Cellular Components, these genes are predominantly localized to the external side of the plasma membrane and MHC protein complexes, which are essential for antigen presentation. The Molecular Function results further highlight activities such as peptide binding and cytokine receptor activity, providing evidence that the up-regulated genes are actively involved in promoting a "hot" tumor microenvironment conducive to ICI efficacy.
 <p align="center">
   <img src="DEA results/GO_up.png" alt="GO Enrichment Up" width="500" height="500"/>
@@ -41,6 +42,7 @@ In contrast, the down-regulated genes are primarily associated with metabolic an
 
 ## 3.3. Feature Selection and SVM-RFE
 The primary objective of this stage was to condense the initial pool of 1,540 DEGs into a highly discriminative subset of features. By employing a two-step process—initial statistical filtering via Chi-square followed by Support Vector Machine-Recursive Feature Elimination (SVM-RFE)—the study sought to identify the most robust biomarkers capable of predicting immunotherapy response with high precision while minimizing model complexity.
+
 The analysis of model performance demonstrates that feature reduction significantly influences predictive accuracy and stability. The SVM-RFE algorithm was used to evaluate three distinct feature sets: the Top 4 up-regulated genes, the Top 4 down-regulated genes, and a broader set of the Top 100 DEGs.
 + The Top 100 DEG model achieved the highest overall performance, with a training accuracy of 0.9047 and a validation accuracy of 0.7971. This model also yielded a superior ROC-AUC of 0.94, indicating exceptional class separation.
 + The Top 4 up-regulated model, featuring genes such as `KRTDAP, PTPRZ1, RLBP1, and SLC9A3`, showed strong generalizability with a validation accuracy of 0.7963 and a robust AUC of 0.88.
@@ -52,6 +54,7 @@ The analysis of model performance demonstrates that feature reduction significan
 </p>
 
 The identification of these specific "driver genes" marks a transition from broad biological pathways to a localized molecular signature. High-ranking genes such as GSTA3, LCK, and KRTDAP align with the immune-activation signals identified in the previous GO enrichment analysis. This refined feature set—particularly the high-performing Top 100 DEGs—will serve as the finalized input for the XGBoost classifier, where Bayesian Optimization will be applied to further sharpen the model's predictive boundary for clinical response.
+
 
 
 
