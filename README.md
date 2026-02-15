@@ -26,16 +26,19 @@ The xCell algorithm was employed to estimate infiltration scores for 64 immune a
   <br>
   <i>Figure 1: Volcano Plot of Differentially Expressed Genes (DEGs) in Melanoma.</i>
 </p>
+
 ## 3.2. Gene Ontology Enrichment Analysis
 - The primary objective of this analysis was to decode the biological significance of the identified `1,540` DEGs by categorizing them into three functional domains: Biological Process (BP), Cellular Component (CC), and Molecular Function (MF). By mapping these genes to established Gene Ontology terms, the study aims to ensure that the candidate features selected for the subsequent machine learning models carry relevant biological signals, particularly those associated with the mechanisms of anti-tumor immunity and immunotherapy response.
 - The analysis of up-regulated genes reveals a robust enrichment in pathways critical for a favorable response to immune checkpoint inhibitors. In the Biological Process domain, there is a strong focus on lymphocyte activation and immune response signaling, achieving high statistical significance with $-log_{10}FDR$ values exceeding 12.5. Regarding Cellular Components, these genes are predominantly localized to the external side of the plasma membrane and MHC protein complexes, which are essential for antigen presentation. The Molecular Function results further highlight activities such as peptide binding and cytokine receptor activity, providing evidence that the up-regulated genes are actively involved in promoting a "hot" tumor microenvironment conducive to ICI efficacy.
 <p align="center">
-  <img src="DEA results/GO_up.png" alt="GO Enrichment Up" width="400"/>
-  <img src="DEA results/GO_down.png" alt="GO Enrichment Down" width="400"/>
+  <img src="DEA results/GO_up.png" alt="GO Enrichment Up" width="500" height="200"/>
+  <img src="DEA results/GO_down.png" alt="GO Enrichment Down" width="500" height="200"/>
   <br>
   <i>Figure 2: Gene Ontology (GO) dot plots illustrating the top enriched terms for up-regulated (left) and down-regulated (right) genes.</i>
 </p>
-In contrast, the down-regulated genes are primarily associated with metabolic and structural pathways that may characterize non-responsive tumor tissues. The Biological Process domain for these genes is enriched in lipid metabolism and epidermis development, while Cellular Components show significant localization in the extracellular matrix and keratin filaments. Molecular Function analysis reveals a high degree of enrichment in catalytic and structural molecule activities. These findings suggest that the down-regulated gene set reflects altered metabolic states or structural barriers that potentially hinder immune cell infiltration and treatment effectiveness.
+
+-In contrast, the down-regulated genes are primarily associated with metabolic and structural pathways that may characterize non-responsive tumor tissues. The Biological Process domain for these genes is enriched in lipid metabolism and epidermis development, while Cellular Components show significant localization in the extracellular matrix and keratin filaments. Molecular Function analysis reveals a high degree of enrichment in catalytic and structural molecule activities. These findings suggest that the down-regulated gene set reflects altered metabolic states or structural barriers that potentially hinder immune cell infiltration and treatment effectiveness.
+
 
 
 
