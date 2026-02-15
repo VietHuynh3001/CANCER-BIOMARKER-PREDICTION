@@ -37,7 +37,21 @@ The xCell algorithm was employed to estimate infiltration scores for 64 immune a
   <i>Figure 2: Gene Ontology (GO) dot plots illustrating the top enriched terms for up-regulated (left) and down-regulated (right) genes.</i>
 </p>
 
--In contrast, the down-regulated genes are primarily associated with metabolic and structural pathways that may characterize non-responsive tumor tissues. The Biological Process domain for these genes is enriched in lipid metabolism and epidermis development, while Cellular Components show significant localization in the extracellular matrix and keratin filaments. Molecular Function analysis reveals a high degree of enrichment in catalytic and structural molecule activities. These findings suggest that the down-regulated gene set reflects altered metabolic states or structural barriers that potentially hinder immune cell infiltration and treatment effectiveness.
+- In contrast, the down-regulated genes are primarily associated with metabolic and structural pathways that may characterize non-responsive tumor tissues. The Biological Process domain for these genes is enriched in lipid metabolism and epidermis development, while Cellular Components show significant localization in the extracellular matrix and keratin filaments. Molecular Function analysis reveals a high degree of enrichment in catalytic and structural molecule activities. These findings suggest that the down-regulated gene set reflects altered metabolic states or structural barriers that potentially hinder immune cell infiltration and treatment effectiveness.
+
+## 3.3. Feature Selection and SVM-RFE Validation
+- The primary objective of this stage was to condense the initial pool of 1,540 DEGs into a highly discriminative subset of features. By employing a two-step process—initial statistical filtering via Chi-square followed by Support Vector Machine-Recursive Feature Elimination (SVM-RFE)—the study sought to identify the most robust biomarkers capable of predicting immunotherapy response with high precision while minimizing model complexity.
+- The analysis of model performance demonstrates that feature reduction significantly influences predictive accuracy and stability. The SVM-RFE algorithm was used to evaluate three distinct feature sets: the Top 4 up-regulated genes, the Top 4 down-regulated genes, and a broader set of the Top 100 DEGs.
++ The Top 100 DEG model achieved the highest overall performance, with a training accuracy of 0.9047 and a validation accuracy of 0.7971. This model also yielded a superior ROC-AUC of 0.94, indicating exceptional class separation.
++ The Top 4 up-regulated model, featuring genes such as `KRTDAP, PTPRZ1, RLBP1, and SLC9A3`, showed strong generalizability with a validation accuracy of 0.7963 and a robust AUC of 0.88.
++ The Top 4 down-regulated model (including `CUX2, SIGLEC8, SPDYC, and SERTM2`) exhibited slightly lower performance, with a validation accuracy of 0.7140 and an AUC of 0.79, suggesting that while down-regulated genes contribute to the signal, up-regulated immune-related features provide more critical predictive weight.
+<p align="center">
+<img src="image_efa20b.png" alt="SVM-RFE Performance Metrics" width="90%"/>
+<br>
+<i>Figure 3: SVM-RFE validation results showing Accuracy (left) and ROC-AUC curves (right) for the selected gene subsets.</i>
+</p>
+
+- The identification of these specific "driver genes" marks a transition from broad biological pathways to a localized molecular signature. High-ranking genes such as GSTA3, LCK, and KRTDAP align with the immune-activation signals identified in the previous GO enrichment analysis. This refined feature set—particularly the high-performing Top 100 DEGs—will serve as the finalized input for the XGBoost classifier, where Bayesian Optimization will be applied to further sharpen the model's predictive boundary for clinical response.
 
 
 
