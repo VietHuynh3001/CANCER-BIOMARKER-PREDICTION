@@ -22,7 +22,8 @@ The xCell algorithm was employed to estimate infiltration scores for 64 immune a
 ## 3.1. Differential Expression Analysis
 - The primary objective of this analysis is to identify genes exhibiting significant expression variations between treatment responders and non-responders, thereby establishing a high-quality candidate pool for subsequent feature selection stages. By applying a stringent significance threshold of an adjusted p-value ($p_{adj}$) < 0.05 and an absolute $log_2(\text{fold change}) > 1$, the analysis successfully identified a total of `1,540 differentially expressed genes (DEGs)`. Among these, the distribution was relatively balanced, comprising `745 up-regulated genes` and `795 down-regulated genes`. The resulting Volcano Plot illustrates a robust transcriptomic signature, characterized by numerous genes achieving high statistical significance ($-log_{10}p_{adj} > 12$) and substantial magnitude of change ($log_2FC$ ranging from approximately -5 to 10). This diverse set of DEGs serves as the foundational data for the ensuing Chi-square filtering and SVM-RFE prioritization steps.
 
-![Vocalno plot]('DEA results/volcano_plot.png')
+![Vocalno plot](volcano_plot.png)
+
 
 
 
