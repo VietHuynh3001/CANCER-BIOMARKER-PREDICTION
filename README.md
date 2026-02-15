@@ -1,23 +1,28 @@
 # 1.INTRODUCTION:
-Breast cancer have been one the most severe disease, posing serious problem to public health. Thus, an effective treatment on breast cancer have been necessary than ever. Immunotherapy have been considered the most potential treatment due to lack of side effects and prolonged effeciency of immunological memory. However, the effeciency of the treatment depends on the affinity between biomarker and antibody, which is changed due to tumor heterogenity caused by tumor microenviromnet. This project aim to identify the potential breast cancer biomarker using machine learning and stastical methods and perform further tumor microenvironment analysis 
-# 1. SOURCE CODE
-+1.DATA_PREPROCESSING.ipynb: Handles data cleaning and preprocessing for the two primary datasets GSE91061 and GSE78220.
-+2.PROJECT.ipynb: The main analysis pipeline. This notebook executes:
-   Differential Expression Analysis (DEA).
-   Immune analysis.
-   Gene Ontology enrichment analysis.
-   Feature selection using SVM-RFE.
-   Identification of survival-associated DEGs.
-   Training of RFC models (RFC-surv, RFC-seq, RFC16).
-+3.RFC7.ipynb: Training the RFC7 model.
-+4.UTILS.py: Contains helper functions for data analysis and visualization used throughout the project.
+Melanoma remains a significant global health challenge, requiring more precise and effective therapeutic interventions. Immunotherapy, particularly Immune Checkpoint Inhibitors (ICIs), has emerged as a promising strategy, leveraging immunological memory for long-term efficacy with fewer side effects than conventional chemotherapy. However, clinical success is often limited by tumor heterogeneity and the complex tumor microenvironment, which significantly impact the binding affinity between biomarkers and therapeutic antibodies.
+This project aims to identify high-potential melanoma biomarkers through an advanced machine learning pipeline. The methodology integrates Chi-square statistical filtering and Support Vector Machine-Recursive Feature Elimination (SVM-RFE) for rigorous feature selection. To maximize predictive performance and capture non-linear biological signals, XGBoost optimized via Bayesian Hyperparameter Optimization is employed. This is followed by an in-depth analysis of the TME to provide mechanistic insights into the identified biomarkers and their correlation with immune cell infiltration.
 
-2. DATA & OUTPUT
-+1.melanoma/: Contains the 8 original raw datasets.
-+2.Preprocessed_data/: Processed data for GSE78220 and GSE91061, along with input files for immune response analysis.
-+3.Top_genes_SVM_RFE/: Stores pickle files for the top 4 up-regulated, top 4 down-regulated, and top 100 genes.
+# 2. METHOD:
+## 2.1. DATA RETRIEVAL AND PREPROCESSING:
+Clinical and transcriptomic data of melanoma patients treated with ICIs were retrieved from cBioPortal and GEO. Patients were classified as responders or non-responders. Differential Expression Analysis (DEA) was performed using the pydeseq2 library, with significance defined as an adjusted p-value < 0.05 and |log_2FC| > 1.0 .
+## 2.2. TWO-STAGE FEATURE SELECTION:
+To refine the feature set, a two-stage selection process was implemented:
++ Stage 1: Chi-square Test: A statistical filter was applied to remove genes whose expression levels showed no significant association with clinical response.
++ Stage 2: SVM-RFE: A Support Vector Machine-Recursive Feature Elimination algorithm was used to rank features and select the most discriminative subset by iteratively removing low-weight genes.
+## 2.3. SURVIVAL-ASSOCIATED BIOMARKER ANALYSIS
+High-ranking DEGs from SVM-RFE were intersected with survival-related genes from the TCGA-SKCM cohort. The Mann-Whitney U-test was performed to compare the expression levels of these survival-related genes between responders and non-responders to ensure their association with treatment outcomes. The Cox proportional hazard model then assessed the independent impact of these genes on overall survival. Kaplan-Meier plots were generated to visualize survival probability differences between high and low expression groups.
+## 2.4.GENE ONTOLOGY ENRICHMENT ANALYSIS
+Functional enrichment analysis was performed using the clusterProfiler package to explore Biological Processes, Molecular Functions, and Cellular Components. A significance threshold of adjusted p-value < 0.05 was applied to identify immune-related pathways.
+## 2.5.XGBOOST MODEL AND BAYESIAN OPTIMIZATION:
+Predictive models were constructed using the XGBoost algorithm to capture complex non-linear signals. To prevent overfitting and maximize the Area Under the Curve (AUC), Bayesian Optimization was utilized via BayesSearchCV to tune critical hyperparameters, including learning_rate, max_depth, gamma, and scale_pos_weight.
+## 2.6.TUMOR MICROENVIRONMENT ANALYSIS:
+The xCell algorithm was employed to estimate infiltration scores for 64 immune and stromal cell types. This analyzed the correlation between selected biomarkers and the tumor microenvironment (TME), including CD8+ T cells, B cells, and MDSCs, to validate biological relevance.
+
+# 3.RESULTS:
+## 3.1.
 +4.DEA_results/: Output files generated from Differential Expression Analysis.
 +5.xcell_results/: Results from the immune response analysis (xCell).
 <b>2.RESULTS:</b>
+
 
 
