@@ -1,6 +1,6 @@
 # 1.INTRODUCTION:
-Melanoma remains a significant global health challenge, requiring more precise and effective therapeutic interventions. Immunotherapy, particularly Immune Checkpoint Inhibitors (ICIs), has emerged as a promising strategy, leveraging immunological memory for long-term efficacy with fewer side effects than conventional chemotherapy. However, clinical success is often limited by tumor heterogeneity and the complex tumor microenvironment, which significantly impact the binding affinity between biomarkers and therapeutic antibodies.
-This project aims to identify high-potential melanoma biomarkers through an advanced machine learning pipeline. The methodology integrates Chi-square statistical filtering and Support Vector Machine-Recursive Feature Elimination (SVM-RFE) for rigorous feature selection. To maximize predictive performance and capture non-linear biological signals, XGBoost optimized via Bayesian Hyperparameter Optimization is employed. This is followed by an in-depth analysis of the TME to provide mechanistic insights into the identified biomarkers and their correlation with immune cell infiltration.
+- Melanoma remains a significant global health challenge, requiring more precise and effective therapeutic interventions. Immunotherapy, particularly Immune Checkpoint Inhibitors (ICIs), has emerged as a promising strategy, leveraging immunological memory for long-term efficacy with fewer side effects than conventional chemotherapy. However, clinical success is often limited by tumor heterogeneity and the complex tumor microenvironment, which significantly impact the binding affinity between biomarkers and therapeutic antibodies.
+- This project aims to identify high-potential melanoma biomarkers through an advanced machine learning pipeline. The methodology integrates Chi-square statistical filtering and Support Vector Machine-Recursive Feature Elimination (SVM-RFE) for rigorous feature selection. To maximize predictive performance and capture non-linear biological signals, XGBoost optimized via Bayesian Hyperparameter Optimization is employed. This is followed by an in-depth analysis of the TME to provide mechanistic insights into the identified biomarkers and their correlation with immune cell infiltration.
 
 # 2. METHOD:
 ## 2.1. DATA RETRIEVAL AND PREPROCESSING:
@@ -23,6 +23,7 @@ The xCell algorithm was employed to estimate infiltration scores for 64 immune a
 +4.DEA_results/: Output files generated from Differential Expression Analysis.
 +5.xcell_results/: Results from the immune response analysis (xCell).
 <b>2.RESULTS:</b>
+
 
 
 
