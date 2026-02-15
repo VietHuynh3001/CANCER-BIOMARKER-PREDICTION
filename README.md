@@ -59,16 +59,16 @@ The identification of these specific "driver genes" marks a transition from broa
 The primary objective of this analysis was to validate the prognostic value of the identified DEGs by intersecting high-ranking features from the SVM-RFE process with survival-associated genes from the TCGA-SKCM cohort. This step ensures that the selected biomarkers are not only predictive of immediate treatment response but also serve as significant indicators of long-term patient survival outcomes.
 
 The intersection analysis yielded a refined set of eight core survival-related biomarkers: FCRL3, IKZF3, LOXL4, NUGGC, PLA2G2D, POU2AF1, SIRPG, and TNFRSF17. To verify their clinical relevance, a Mann-Whitney U-test was performed, revealing distinct expression patterns between responders (R) and non-responders (NR). For the majority of these genes, significantly higher expression levels were observed in the responder group ($p < 0.05$), reinforcing their role as positive indicators of immunotherapy efficacy.
-<p align="center"><img src="DEA results/Mann_Whitney.png" alt="Mann Whitney Analysis" width="90%"/><i>Figure 4: Expression levels of survival-related biomarkers between responders and non-responders validated by Mann-Whitney U-test.</i></p>
+<p align="center"><img src="DEA results/Mann_Whitney.png" alt="Mann Whitney Analysis" width="90%"/><br<i>Figure 4: Expression levels of survival-related biomarkers between responders and non-responders validated by Mann-Whitney U-test.</i></p>
 
 The prognostic impact of these biomarkers was further quantified using the Cox Proportional Hazards (CPH) model and visualized through Kaplan-Meier plots.
 - Multivariate Cox Regression: The analysis identified several genes as strong independent prognostic factors. FCRL3 ($HR = 0.24$), IKZF3 ($HR = 0.25$), and PLA2G2D ($HR = 0.26$) demonstrated the most significant protective effects, where higher expression levels correlate with a substantially reduced risk of mortality. Conversely, LOXL4 was identified as a significant risk factor ($HR = 1.93, p = 0.046$), suggesting that its up-regulation is associated with poorer survival outcomes.
-<p align="center"><img src="DEA results/Hazard_ratio.png" alt="Hazard Ratio" width="70%"/><i>Figure 5: Multivariate Cox regression analysis displaying the Hazard Ratios (HR) for the identified survival biomarkers.</i></p>
+<p align="center"><img src="DEA results/Hazard_ratio.png" alt="Hazard Ratio" width="70%"/><br><i>Figure 5: Multivariate Cox regression analysis displaying the Hazard Ratios (HR) for the identified survival biomarkers.</i></p>
 
 - Kaplan-Meier Survival Evaluation: The survival curves illustrate a clear and significant separation in overall survival (OS) between patients with high and low expression levels of these markers. Specifically, high expression of protective biomarkers—particularly FCRL3, IKZF3, and SIRPG—is associated with extended survival probabilities, whereas high expression of LOXL4 correlates with a steeper decline in survival over time.
-<p align="center"><img src="DEA results/Kaplan_meier.png" alt="Kaplan Meier Plot" width="90%"/><i>Figure 6: Kaplan-Meier survival curves illustrating the differential survival probabilities between high and low expression groups.</i></p>
+<p align="center"><img src="DEA results/Kaplan_meier.png" alt="Kaplan Meier Plot" width="90%"/><br><i>Figure 6: Kaplan-Meier survival curves illustrating the differential survival probabilities between high and low expression groups.</i></p>
 
-**Table 2: Multivariate Cox Regression and Clinical Cutoff Summary**
+***Table 2: Multivariate Cox Regression and Clinical Cutoff Summary***
 | Variable | p-value | Hazard Ratio (HR) | 95% CI (Low) | 95% CI (High) | Cutoff Value |
 | :--- | :---: | :---: | :---: | :---: | :---: |
 | **FCRL3** | 0.000031 | 0.24 | 0.12 | 0.47 | 0.1045 |
@@ -79,6 +79,7 @@ The prognostic impact of these biomarkers was further quantified using the Cox P
 | **POU2AF1** | 0.002115 | 0.36 | 0.19 | 0.69 | 0.1514 |
 | **LOXL4** | 0.045928 | 1.93 | 1.01 | 3.67 | 5.6728 |
 | **TNFRSF17** | 0.103150 | 0.51 | 0.22 | 1.15 | 1.5887 |
+
 
 
 
