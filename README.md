@@ -1,12 +1,6 @@
-<html>
-<body>
-<b>1.INTRODUCTION</b>
-NOTE: THIS PROJECT IS THE REPLICATION WORK OF "Ahmed, Yaman B et al. “Genomic and Transcriptomic 
-Predictors of Response to Immune Checkpoint Inhibitors in Melanoma Patients: A Machine Learning 
-Approach.” Cancers vol. 14,22 5605. 15 Nov. 2022, doi:10.3390/cancers14225605". THE PROJECT SERVES AS A HANDS-ON 
-EXERCISE TO DEEPEN MY KNOWLEDGE IN BIOINFORMATICS AND MACHINE LEARNING APPLICATIONS IN ONCOLOGY.
-
-1. SOURCE CODE
+# 1.INTRODUCTION:
+Breast cancer have been one the most severe disease, posing serious problem to public health. Thus, an effective treatment on breast cancer have been necessary than ever. Immunotherapy have been considered the most potential treatment due to lack of side effects and prolonged effeciency of immunological memory. However, the effeciency of the treatment depends on the affinity between biomarker and antibody, which is changed due to tumor heterogenity caused by tumor microenviromnet. This project aim to identify the potential breast cancer biomarker using machine learning and stastical methods and perform further tumor microenvironment analysis 
+# 1. SOURCE CODE
 +1.DATA_PREPROCESSING.ipynb: Handles data cleaning and preprocessing for the two primary datasets GSE91061 and GSE78220.
 +2.PROJECT.ipynb: The main analysis pipeline. This notebook executes:
    Differential Expression Analysis (DEA).
@@ -26,5 +20,4 @@ EXERCISE TO DEEPEN MY KNOWLEDGE IN BIOINFORMATICS AND MACHINE LEARNING APPLICATI
 +5.xcell_results/: Results from the immune response analysis (xCell).
 <b>2.RESULTS:</b>
 
-</body>
-</html>
+
