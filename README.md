@@ -92,19 +92,21 @@ The performance analysis indicates that while clinical features provide a stable
 <div align="center">
   <img src="RFC7.png" alt="DEA results/RFC7.png" width="48%"/>
   <img src="ROC_AUC_1.png" alt="DEA results/ROC_AUC_1.png" width="48%"/>
-
+  <br>
   <i>Figure 7: Performance metrics and feature importance for RFC_7 (left) and ROC Curve comparison for transcriptomic models (right).</i>
 </div>
 
 Feature Importance Analysis across the models highlights a shift in predictive drivers. In RFC_7, the most influential factors were Mutation Count (0.1895) and TMB (0.1740). In contrast, the RFC-16 model is driven by biological markers where SERTM2 accounts for over 32% of the total feature score, followed by SLC9A3 and RLBP1. The consistent high ranking of these genes underscores their biological relevance in the melanoma tumor microenvironment.
 <div align="center">
   <img src="DEA results/Feature_importance_1.png" alt="Feature Importance Results" width="90%"/>
+  <br>
   <i>Figure 8: Relative feature importance scores for RFC-SURV, RFC-16, and RFC-SEQ.</i>
   
   Table 3: Comparative Performance Summary of RFC ModelsModelMean Accuracy (95% CI)PrecisionRecallF1-ScoreAUCRFC_70.8031 (0.6829 - 0.9024)0.60000.33330.42860.5556RFC-SURV0.7383 (0.5556 - 0.8889)0.80950.85000.82930.7500RFC-SEQ0.7076 (0.5185 - 0.8889)1.00000.60000.75000.8286RFC-160.7792 (0.6296 - 0.9259)1.00000.70000.82350.8571
   </div>
 
 In conclusion, while the RFC_7 model offers high overall accuracy, the RFC-16 model provides a much more effective balance of precision and sensitivity. The superior AUC and perfect precision on test sets suggest that this 16-gene signature is the most powerful candidate for clinical decision-making in melanoma immunotherapy.
+
 
 
 
