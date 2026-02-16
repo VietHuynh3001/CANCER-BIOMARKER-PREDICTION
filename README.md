@@ -80,6 +80,31 @@ The prognostic impact of these biomarkers was further quantified using the Cox P
 | **LOXL4** | 0.045928 | 1.93 | 1.01 | 3.67 | 5.6728 |
 | **TNFRSF17** | 0.103150 | 0.51 | 0.22 | 1.15 | 1.5887 |
 
+## 3.5. Comparative Performance Analysis: 
+The primary objective of this final stage was to evaluate the predictive power of the Random Forest Classifier (RFC) across different feature sets. By comparing a model based on clinical features (RFC_7) with those trained on survival-associated genes (RFC-SURV), top sequential features (RFC-SEQ), and a combined set (RFC-16), the study aimed to identify the most parsimonious yet accurate molecular signature for predicting immunotherapy response.
+
+The performance analysis indicates that while clinical features provide a stable baseline, integrating survival-related and discriminative sequential genes yields significantly more robust results.
++ RFC_7 (Clinical Baseline): This model utilized 7 clinical features, including Mutation Count, TMB, and Fraction Genome Altered. It achieved a mean bootstrap accuracy of 0.8031 (95% CI: 0.6829-0.9024). However, despite the high accuracy, it showed a limited recall of 0.3333, precision of 0.60, and an AUC of 0.5556, reflecting the difficulty of predicting response using only non-transcriptomic data.
++ RFC-SURV: Utilizing the 8 survival-related biomarkers, this model achieved a mean bootstrap accuracy of 0.7383 (95% CI: 0.5556-0.8889). While it maintains a high recall (0.85), its AUC of 0.75 suggests that survival signals alone, though prognostic, may require additional discriminative features for optimal classification.
++ RFC-SEQ: Based on the top 8 sequential features from SVM-RFE, this model showed a mean accuracy of 0.7076 (95% CI: 0.5185-0.8889). Notably, it achieved a perfect precision of 1.0, with an improved AUC of 0.8286, driven largely by the heavy feature importance of SERTM2.
++ RFC-16 (Combined): By combining both feature sets, the RFC-16 model reached the highest stability and accuracy, with a mean bootstrap estimate of 0.7792 (95% CI: 0.6296-0.9259). This model achieved a superior AUC of 0.8571, demonstrating that the synergy between prognostic (survival) and diagnostic (sequential) genes enhances the model's ability to distinguish responders.
+
+<div align="center">
+  <img src="RFC7.png" alt="DEA results/RFC7.png" width="48%"/>
+  <img src="ROC_AUC_1.png" alt="DEA results/ROC_AUC_1.png" width="48%"/>
+
+  <i>Figure 7: Performance metrics and feature importance for RFC_7 (left) and ROC Curve comparison for transcriptomic models (right).</i>
+</div>
+
+Feature Importance Analysis across the models highlights a shift in predictive drivers. In RFC_7, the most influential factors were Mutation Count (0.1895) and TMB (0.1740). In contrast, the RFC-16 model is driven by biological markers where SERTM2 accounts for over 32% of the total feature score, followed by SLC9A3 and RLBP1. The consistent high ranking of these genes underscores their biological relevance in the melanoma tumor microenvironment.
+<div align="center">
+  <img src="DEA results/Feature_importance_1.png" alt="Feature Importance Results" width="90%"/>
+  <i>Figure 8: Relative feature importance scores for RFC-SURV, RFC-16, and RFC-SEQ.</i>
+  
+  Table 3: Comparative Performance Summary of RFC ModelsModelMean Accuracy (95% CI)PrecisionRecallF1-ScoreAUCRFC_70.8031 (0.6829 - 0.9024)0.60000.33330.42860.5556RFC-SURV0.7383 (0.5556 - 0.8889)0.80950.85000.82930.7500RFC-SEQ0.7076 (0.5185 - 0.8889)1.00000.60000.75000.8286RFC-160.7792 (0.6296 - 0.9259)1.00000.70000.82350.8571
+  </div>
+
+In conclusion, while the RFC_7 model offers high overall accuracy, the RFC-16 model provides a much more effective balance of precision and sensitivity. The superior AUC and perfect precision on test sets suggest that this 16-gene signature is the most powerful candidate for clinical decision-making in melanoma immunotherapy.
 
 
 
