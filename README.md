@@ -90,8 +90,8 @@ The performance analysis indicates that while clinical features provide a stable
 + RFC-16 (Combined): By combining both feature sets, the RFC-16 model reached the highest stability and accuracy, with a mean bootstrap estimate of 0.7792 (95% CI: 0.6296-0.9259). This model achieved a superior AUC of 0.8571, demonstrating that the synergy between prognostic (survival) and diagnostic (sequential) genes enhances the model's ability to distinguish responders.
 
 <div align="center">
-  <img src="RFC7.png" alt="DEA results/RFC7.png" width="48%"/>
-  <img src="ROC_AUC_1.png" alt="DEA results/ROC_AUC_1.png" width="48%"/>
+  <img src="DEA results/RFC7.png" alt="RFC7 Results" width="48%"/>
+  <img src="DEA results/ROC_AUC_1.png" alt="ROC Results" width="48%"/>
   <br>
   <i>Figure 7: Performance metrics and feature importance for RFC_7 (left) and ROC Curve comparison for transcriptomic models (right).</i>
 </div>
