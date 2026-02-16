@@ -162,12 +162,13 @@ Feature Importance Analysis across the models highlights a shift in predictive d
 In conclusion, while the RFC_7 model offers high overall accuracy, the RFC-16 model provides a much more effective balance of precision and sensitivity. The superior AUC and perfect precision on test sets suggest that this 16-gene signature is the most powerful candidate for clinical decision-making in melanoma immunotherapy.
 
 # 4. CONCLUSION
-This study successfully developed a high-performance computational framework to predict immunotherapy response in melanoma patients through the following key outcomes:
+This project successfully developed a high-performance computational framework to predict immunotherapy response in melanoma patients through the following key outcomes:
 - Identification of Molecular Signatures: Differential Expression Analysis (DEA) identified 1,540 genes with significant expression shifts, primarily enriched in lymphocyte activation and MHC protein complex pathways.
 - Prognostic Validation: A core set of 8 survival-related biomarkers (e.g., FCRL3, IKZF3, PLA2G2D) was confirmed as critical protective factors with Hazard Ratios (HR) below 0.3.
 - Model Optimization: While the clinical baseline model (RFC_7) achieved a stable 81% accuracy, it demonstrated poor sensitivity with a low recall of 0.33 in identifying treatment responders.
 - Superiority of RFC-16: The combined 16-gene model (RFC-16) proved to be the most effective architecture, achieving an AUC of 0.8571 and a perfect precision of 1.0, successfully overcoming the class imbalance issues inherent in clinical data.
 - Potential Biomarker Insights: The dominant predictive weight of the SERTM2 gene (over 32% of feature importance) highlights its potential as a focal point for future diagnostic assays and targeted therapies.
+
 
 
 
