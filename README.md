@@ -92,10 +92,10 @@ The prognostic impact of these biomarkers was further quantified using the Cox P
 </p>
 
 <div align="center">
-<br>
+  <br>
   <i>
-     Table 2: Multivariate Cox Regression and Clinical Cutoff Summary
-   </i>
+    Table 2: Multivariate Cox Regression and Clinical Cutoff Summary
+  </i>
 
 | Variable | p-value | Hazard Ratio (HR) | 95% CI (Low) | 95% CI (High) | Cutoff Value |
 | :--- | :---: | :---: | :---: | :---: | :---: |
@@ -142,8 +142,9 @@ Feature Importance Analysis across the models highlights a shift in predictive d
   <i>
     Figure 9: Relative feature importance scores for RFC-SURV, RFC-16, and RFC-SEQ.
   </i>
+</div>
   
- <div align="center">
+<div align="center">
 <br>
    <i>
      Table 3: Comparative Performance Summary of RFC Models
@@ -159,6 +160,7 @@ Feature Importance Analysis across the models highlights a shift in predictive d
 
 
 In conclusion, while the RFC_7 model offers high overall accuracy, the RFC-16 model provides a much more effective balance of precision and sensitivity. The superior AUC and perfect precision on test sets suggest that this 16-gene signature is the most powerful candidate for clinical decision-making in melanoma immunotherapy.
+
 
 
 
