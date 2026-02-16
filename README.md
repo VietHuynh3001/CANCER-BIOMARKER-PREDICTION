@@ -91,7 +91,12 @@ The prognostic impact of these biomarkers was further quantified using the Cox P
   </i>
 </p>
 
-***Table 2: Multivariate Cox Regression and Clinical Cutoff Summary***
+<div align="center">
+<br>
+  <i>
+     Table 2: Multivariate Cox Regression and Clinical Cutoff Summary
+   </i>
+
 | Variable | p-value | Hazard Ratio (HR) | 95% CI (Low) | 95% CI (High) | Cutoff Value |
 | :--- | :---: | :---: | :---: | :---: | :---: |
 | **FCRL3** | 0.000031 | 0.24 | 0.12 | 0.47 | 0.1045 |
@@ -102,6 +107,7 @@ The prognostic impact of these biomarkers was further quantified using the Cox P
 | **POU2AF1** | 0.002115 | 0.36 | 0.19 | 0.69 | 0.1514 |
 | **LOXL4** | 0.045928 | 1.93 | 1.01 | 3.67 | 5.6728 |
 | **TNFRSF17** | 0.103150 | 0.51 | 0.22 | 1.15 | 1.5887 |
+</div>
 
 ## 3.5. Comparative Performance Analysis: 
 The primary objective of this final stage was to evaluate the predictive power of the Random Forest Classifier (RFC) across different feature sets. By comparing a model based on clinical features (RFC_7) with those trained on survival-associated genes (RFC-SURV), top sequential features (RFC-SEQ), and a combined set (RFC-16), the study aimed to identify the most parsimonious yet accurate molecular signature for predicting immunotherapy response.
@@ -128,6 +134,7 @@ The performance analysis indicates that while clinical features provide a stable
   </i>
 </div>
 
+
 Feature Importance Analysis across the models highlights a shift in predictive drivers. In RFC_7, the most influential factors were Mutation Count (0.1895) and TMB (0.1740). In contrast, the RFC-16 model is driven by biological markers where SERTM2 accounts for over 32% of the total feature score, followed by SLC9A3 and RLBP1. The consistent high ranking of these genes underscores their biological relevance in the melanoma tumor microenvironment.
 <div align="center">
   <img src="DEA results/Feature_importance_1.png" alt="Feature Importance Results" width="90%"/>
@@ -152,6 +159,7 @@ Feature Importance Analysis across the models highlights a shift in predictive d
 
 
 In conclusion, while the RFC_7 model offers high overall accuracy, the RFC-16 model provides a much more effective balance of precision and sensitivity. The superior AUC and perfect precision on test sets suggest that this 16-gene signature is the most powerful candidate for clinical decision-making in melanoma immunotherapy.
+
 
 
 
