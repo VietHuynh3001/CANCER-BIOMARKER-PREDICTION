@@ -24,7 +24,9 @@ The primary objective of this analysis is to identify genes exhibiting significa
 <p align="center">
   <img src="DEA results/volcano_plot.png" width="500"/>
   <br>
-  <i>Figure 1: Volcano Plot of Differentially Expressed Genes (DEGs) in Melanoma.</i>
+  <i>
+    Figure 1: Volcano Plot of Differentially Expressed Genes (DEGs) in Melanoma.
+  </i>
 </p>
 
 ## 3.2. Gene Ontology Enrichment Analysis
@@ -35,7 +37,9 @@ The analysis of up-regulated genes reveals a robust enrichment in pathways criti
   <img src="DEA results/GO_up.png" alt="GO Enrichment Up" width="500" height="500"/>
   <img src="DEA results/GO_down.png" alt="GO Enrichment Down" width="500" height="500"/>
   <br>
-  <i>Figure 2: Gene Ontology (GO) dot plots illustrating the top enriched terms for up-regulated (left) and down-regulated (right) genes.</i>
+  <i>
+    Figure 2: Gene Ontology (GO) dot plots illustrating the top enriched terms for up-regulated (left) and down-regulated (right) genes.
+  </i>
 </p>
 
 In contrast, the down-regulated genes are primarily associated with metabolic and structural pathways that may characterize non-responsive tumor tissues. The Biological Process domain for these genes is enriched in lipid metabolism and epidermis development, while Cellular Components show significant localization in the extracellular matrix and keratin filaments. Molecular Function analysis reveals a high degree of enrichment in catalytic and structural molecule activities. These findings suggest that the down-regulated gene set reflects altered metabolic states or structural barriers that potentially hinder immune cell infiltration and treatment effectiveness.
@@ -48,9 +52,11 @@ The analysis of model performance demonstrates that feature reduction significan
 + The Top 4 up-regulated model, featuring genes such as `KRTDAP, PTPRZ1, RLBP1, and SLC9A3`, showed strong generalizability with a validation accuracy of 0.7963 and a robust AUC of 0.88.
 + The Top 4 down-regulated model (including `CUX2, SIGLEC8, SPDYC, and SERTM2`) exhibited slightly lower performance, with a validation accuracy of 0.7140 and an AUC of 0.79, suggesting that while down-regulated genes contribute to the signal, up-regulated immune-related features provide more critical predictive weight.
 <p align="center">
-<img src="DEA results/SVM_RFE.png" alt="SVM-RFE Performance Metrics" width="90%"/>
-<br>
-<i>Figure 3: SVM-RFE validation results showing Accuracy (left) and ROC-AUC curves (right) for the selected gene subsets.</i>
+  <img src="DEA results/SVM_RFE.png" alt="SVM-RFE Performance Metrics" width="90%"/>
+  <br>
+  <i>
+    Figure 3: SVM-RFE validation results showing Accuracy (left) and ROC-AUC curves (right) for the selected gene subsets.
+  </i>
 </p>
 
 The identification of these specific "driver genes" marks a transition from broad biological pathways to a localized molecular signature. High-ranking genes such as GSTA3, LCK, and KRTDAP align with the immune-activation signals identified in the previous GO enrichment analysis. This refined feature set—particularly the high-performing Top 100 DEGs—will serve as the finalized input for the XGBoost classifier, where Bayesian Optimization will be applied to further sharpen the model's predictive boundary for clinical response.
@@ -59,14 +65,31 @@ The identification of these specific "driver genes" marks a transition from broa
 The primary objective of this analysis was to validate the prognostic value of the identified DEGs by intersecting high-ranking features from the SVM-RFE process with survival-associated genes from the TCGA-SKCM cohort. This step ensures that the selected biomarkers are not only predictive of immediate treatment response but also serve as significant indicators of long-term patient survival outcomes.
 
 The intersection analysis yielded a refined set of eight core survival-related biomarkers: FCRL3, IKZF3, LOXL4, NUGGC, PLA2G2D, POU2AF1, SIRPG, and TNFRSF17. To verify their clinical relevance, a Mann-Whitney U-test was performed, revealing distinct expression patterns between responders (R) and non-responders (NR). For the majority of these genes, significantly higher expression levels were observed in the responder group ($p < 0.05$), reinforcing their role as positive indicators of immunotherapy efficacy.
-<p align="center"><img src="DEA results/Mann_Whitney.png" alt="Mann Whitney Analysis" width="90%"/><br<i>Figure 4: Expression levels of survival-related biomarkers between responders and non-responders validated by Mann-Whitney U-test.</i></p>
+<p align="center">
+  <img src="DEA results/Mann_Whitney.png" alt="Mann Whitney Analysis" width="90%"/>
+  <br>
+  <i>Figure 4: Expression levels of survival-related biomarkers between responders and non-responders validated by Mann-Whitney U-test.
+  </i>
+</p>
 
 The prognostic impact of these biomarkers was further quantified using the Cox Proportional Hazards (CPH) model and visualized through Kaplan-Meier plots.
 - Multivariate Cox Regression: The analysis identified several genes as strong independent prognostic factors. FCRL3 ($HR = 0.24$), IKZF3 ($HR = 0.25$), and PLA2G2D ($HR = 0.26$) demonstrated the most significant protective effects, where higher expression levels correlate with a substantially reduced risk of mortality. Conversely, LOXL4 was identified as a significant risk factor ($HR = 1.93, p = 0.046$), suggesting that its up-regulation is associated with poorer survival outcomes.
-<p align="center"><img src="DEA results/Hazard_ratio.png" alt="Hazard Ratio" width="70%"/><br><i>Figure 5: Multivariate Cox regression analysis displaying the Hazard Ratios (HR) for the identified survival biomarkers.</i></p>
+<p align="center">
+  <img src="DEA results/Hazard_ratio.png" alt="Hazard Ratio" width="70%"/>
+  <br>
+  <i>
+    Figure 5: Multivariate Cox regression analysis displaying the Hazard Ratios (HR) for the identified survival biomarkers.
+  </i>
+</p>
 
 - Kaplan-Meier Survival Evaluation: The survival curves illustrate a clear and significant separation in overall survival (OS) between patients with high and low expression levels of these markers. Specifically, high expression of protective biomarkers—particularly FCRL3, IKZF3, and SIRPG—is associated with extended survival probabilities, whereas high expression of LOXL4 correlates with a steeper decline in survival over time.
-<p align="center"><img src="DEA results/Kaplan_meier.png" alt="Kaplan Meier Plot" width="90%"/><br><i>Figure 6: Kaplan-Meier survival curves illustrating the differential survival probabilities between high and low expression groups.</i></p>
+<p align="center">
+  <img src="DEA results/Kaplan_meier.png" alt="Kaplan Meier Plot" width="90%"/>
+  <br>
+  <i>
+    Figure 6: Kaplan-Meier survival curves illustrating the differential survival probabilities between high and low expression groups.
+  </i>
+</p>
 
 ***Table 2: Multivariate Cox Regression and Clinical Cutoff Summary***
 | Variable | p-value | Hazard Ratio (HR) | 95% CI (Low) | 95% CI (High) | Cutoff Value |
@@ -90,22 +113,44 @@ The performance analysis indicates that while clinical features provide a stable
 + RFC-16 (Combined): By combining both feature sets, the RFC-16 model reached the highest stability and accuracy, with a mean bootstrap estimate of 0.7792 (95% CI: 0.6296-0.9259). This model achieved a superior AUC of 0.8571, demonstrating that the synergy between prognostic (survival) and diagnostic (sequential) genes enhances the model's ability to distinguish responders.
 
 <div align="center">
-  <img src="DEA results/RFC7.png" alt="RFC7 Results" width="200"/>
-  <img src="DEA results/ROC_AUC_1.png" alt="ROC Results" width="200"/>
+  <img src="RFC7.png" alt="RFC7 Baseline Performance" width="85%"/>
   <br>
-  <i>Figure 7: Performance metrics and feature importance for RFC_7 (left) and ROC Curve comparison for transcriptomic models (right).</i>
+  <i>
+    Figure 7: Feature importance and metrics for the RFC_7 clinical baseline model.
+  </i>
+</div>
+
+<div align="center">
+  <img src="ROC_AUC_1.png" alt="ROC Results Comparison" width="70%"/>
+  <br>
+  <i>
+    Figure 8: ROC Curve comparison across RFC-SURV, RFC-SEQ, and RFC-16 models.
+  </i>
 </div>
 
 Feature Importance Analysis across the models highlights a shift in predictive drivers. In RFC_7, the most influential factors were Mutation Count (0.1895) and TMB (0.1740). In contrast, the RFC-16 model is driven by biological markers where SERTM2 accounts for over 32% of the total feature score, followed by SLC9A3 and RLBP1. The consistent high ranking of these genes underscores their biological relevance in the melanoma tumor microenvironment.
 <div align="center">
   <img src="DEA results/Feature_importance_1.png" alt="Feature Importance Results" width="90%"/>
   <br>
-  <i>Figure 8: Relative feature importance scores for RFC-SURV, RFC-16, and RFC-SEQ.</i>
+  <i>
+    Figure 9: Relative feature importance scores for RFC-SURV, RFC-16, and RFC-SEQ.
+  </i>
   
-  Table 3: Comparative Performance Summary of RFC ModelsModelMean Accuracy (95% CI)PrecisionRecallF1-ScoreAUCRFC_70.8031 (0.6829 - 0.9024)0.60000.33330.42860.5556RFC-SURV0.7383 (0.5556 - 0.8889)0.80950.85000.82930.7500RFC-SEQ0.7076 (0.5185 - 0.8889)1.00000.60000.75000.8286RFC-160.7792 (0.6296 - 0.9259)1.00000.70000.82350.8571
-  </div>
+ <div align="center">
+<br>
+**Table 3: Comparative Performance Summary of RFC Models**
+
+| Model | Mean Accuracy (95% CI) | Precision | Recall | F1-Score | AUC |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| **RFC_7** | **0.8031 (0.6829 - 0.9024)** | 0.6000 | 0.3333 | 0.4286 | 0.5556 |
+| **RFC-SURV** | 0.7383 (0.5556 - 0.8889) | 0.8095 | **0.8500** | **0.8293** | 0.7500 |
+| **RFC-SEQ** | 0.7076 (0.5185 - 0.8889) | **1.0000** | 0.6000 | 0.7500 | 0.8286 |
+| **RFC-16** | 0.7792 (0.6296 - 0.9259) | **1.0000** | 0.7000 | 0.8235 | **0.8571** |
+<br>
+</div>
 
 In conclusion, while the RFC_7 model offers high overall accuracy, the RFC-16 model provides a much more effective balance of precision and sensitivity. The superior AUC and perfect precision on test sets suggest that this 16-gene signature is the most powerful candidate for clinical decision-making in melanoma immunotherapy.
+
 
 
 
