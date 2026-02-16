@@ -113,7 +113,7 @@ The performance analysis indicates that while clinical features provide a stable
 + RFC-16 (Combined): By combining both feature sets, the RFC-16 model reached the highest stability and accuracy, with a mean bootstrap estimate of 0.7792 (95% CI: 0.6296-0.9259). This model achieved a superior AUC of 0.8571, demonstrating that the synergy between prognostic (survival) and diagnostic (sequential) genes enhances the model's ability to distinguish responders.
 
 <div align="center">
-  <img src="RFC7.png" alt="RFC7 Baseline Performance" width="85%"/>
+  <img src="DEA results/RFC7.png" alt="RFC7 Baseline Performance" width="85%"/>
   <br>
   <i>
     Figure 7: Feature importance and metrics for the RFC_7 clinical baseline model.
@@ -121,7 +121,7 @@ The performance analysis indicates that while clinical features provide a stable
 </div>
 
 <div align="center">
-  <img src="ROC_AUC_1.png" alt="ROC Results Comparison" width="70%"/>
+  <img src="DEA results/ROC_AUC_1.png" alt="ROC Results Comparison" width="70%"/>
   <br>
   <i>
     Figure 8: ROC Curve comparison across RFC-SURV, RFC-SEQ, and RFC-16 models.
@@ -138,7 +138,9 @@ Feature Importance Analysis across the models highlights a shift in predictive d
   
  <div align="center">
 <br>
-**Table 3: Comparative Performance Summary of RFC Models**
+   <i>
+     Table 3: Comparative Performance Summary of RFC Models
+   </i>
 
 | Model | Mean Accuracy (95% CI) | Precision | Recall | F1-Score | AUC |
 | :--- | :---: | :---: | :---: | :---: | :---: |
@@ -150,6 +152,7 @@ Feature Importance Analysis across the models highlights a shift in predictive d
 </div>
 
 In conclusion, while the RFC_7 model offers high overall accuracy, the RFC-16 model provides a much more effective balance of precision and sensitivity. The superior AUC and perfect precision on test sets suggest that this 16-gene signature is the most powerful candidate for clinical decision-making in melanoma immunotherapy.
+
 
 
 
