@@ -111,7 +111,6 @@ The performance analysis indicates that while clinical features provide a stable
 + RFC-SURV: Utilizing the 8 survival-related biomarkers, this model achieved a mean bootstrap accuracy of 0.7383 (95% CI: 0.5556-0.8889). While it maintains a high recall (0.85), its AUC of 0.75 suggests that survival signals alone, though prognostic, may require additional discriminative features for optimal classification.
 + RFC-SEQ: Based on the top 8 sequential features from SVM-RFE, this model showed a mean accuracy of 0.7076 (95% CI: 0.5185-0.8889). Notably, it achieved a perfect precision of 1.0, with an improved AUC of 0.8286, driven largely by the heavy feature importance of SERTM2.
 + RFC-16 (Combined): By combining both feature sets, the RFC-16 model reached the highest stability and accuracy, with a mean bootstrap estimate of 0.7792 (95% CI: 0.6296-0.9259). This model achieved a superior AUC of 0.8571, demonstrating that the synergy between prognostic (survival) and diagnostic (sequential) genes enhances the model's ability to distinguish responders.
-
 <div align="center">
   <img src="DEA results/RFC7.png" alt="RFC7 Baseline Performance" width="85%"/>
   <br>
@@ -119,6 +118,7 @@ The performance analysis indicates that while clinical features provide a stable
     Figure 7: Feature importance and metrics for the RFC_7 clinical baseline model.
   </i>
 </div>
+
 
 <div align="center">
   <img src="DEA results/ROC_AUC_1.png" alt="ROC Results Comparison" width="70%"/>
@@ -148,10 +148,11 @@ Feature Importance Analysis across the models highlights a shift in predictive d
 | **RFC-SURV** | 0.7383 (0.5556 - 0.8889) | 0.8095 | **0.8500** | **0.8293** | 0.7500 |
 | **RFC-SEQ** | 0.7076 (0.5185 - 0.8889) | **1.0000** | 0.6000 | 0.7500 | 0.8286 |
 | **RFC-16** | 0.7792 (0.6296 - 0.9259) | **1.0000** | 0.7000 | 0.8235 | **0.8571** |
-<br>
 </div>
 
+
 In conclusion, while the RFC_7 model offers high overall accuracy, the RFC-16 model provides a much more effective balance of precision and sensitivity. The superior AUC and perfect precision on test sets suggest that this 16-gene signature is the most powerful candidate for clinical decision-making in melanoma immunotherapy.
+
 
 
 
