@@ -1,6 +1,7 @@
 # 1.INTRODUCTION:
-- Melanoma remains a significant global health challenge, requiring more precise and effective therapeutic interventions. Immunotherapy, particularly Immune Checkpoint Inhibitors, has emerged as a promising strategy, offering long-term efficacy with fewer side effects than conventional chemotherapy. However, clinical success is often limited by tumor heterogeneity and the complex tumor microenvironment, which significantly impact how patients respond to these treatments.
-- This project aims to identify high-potential melanoma biomarkers through an advanced machine learning pipeline. The methodology integrates Differential Expression Analysis (DEA), Chi-square filtering, and Support Vector Machine-Recursive Feature Elimination (SVM-RFE) for rigorous feature selection. To maximize predictive performance and capture non-linear biological signals, Random Forest optimized via Bayesian Hyperparameter Optimization is employed. This is followed by a survival analysis to provide insights into the identified biomarkers and their correlation with patient outcomes and immune signals.
+Melanoma remains a significant global health challenge, requiring more precise and effective therapeutic interventions. Immunotherapy, particularly Immune Checkpoint Inhibitors, has emerged as a promising strategy, offering long-term efficacy with fewer side effects than conventional chemotherapy. However, clinical success is often limited by tumor heterogeneity and the complex tumor microenvironment, which significantly impact how patients respond to these treatments.
+
+This project aims to identify high-potential melanoma biomarkers through an advanced machine learning pipeline. The methodology integrates Differential Expression Analysis (DEA), Chi-square filtering, and Support Vector Machine-Recursive Feature Elimination (SVM-RFE) for rigorous feature selection. To maximize predictive performance and capture non-linear biological signals, Random Forest optimized via Bayesian Hyperparameter Optimization is employed. This is followed by a survival analysis to provide insights into the identified biomarkers and their correlation with patient outcomes and immune signals.
 
 # 2. METHOD:
 ## 2.1. DATA RETRIEVAL AND PREPROCESSING:
@@ -28,72 +29,72 @@ The primary objective of this analysis was to identify genes with significant ex
 </p>
 
 ## 3.2. Gene Ontology Enrichment Analysis
-The primary objective of this analysis was to decode the biological significance of the identified `1,540` DEGs by categorizing them into three functional domains: Biological Process (BP), Cellular Component (CC), and Molecular Function (MF). By mapping these genes to established Gene Ontology terms, the study aims to ensure that the candidate features selected for the subsequent machine learning models carry relevant biological signals, particularly those associated with the mechanisms of anti-tumor immunity and immunotherapy response.
+The primary objective of this analysis was to understand the biological meaning of the `1,540` DEGs by grouping them into three domains: Biological Process (BP), Cellular Component (CC), and Molecular Function (MF). By mapping these genes to Gene Ontology terms, the study ensures that the features selected for machine learning models have relevant biological signals, especially those related to immune response and immunotherapy success.
 
-The analysis of up-regulated genes reveals a robust enrichment in pathways critical for a favorable response to immune checkpoint inhibitors. In the Biological Process domain, there is a strong focus on lymphocyte activation and immune response signaling, achieving high statistical significance with $-log_{10}FDR$ values exceeding 12.5. Regarding Cellular Components, these genes are predominantly localized to the external side of the plasma membrane and MHC protein complexes, which are essential for antigen presentation. The Molecular Function results further highlight activities such as peptide binding and cytokine receptor activity, providing evidence that the up-regulated genes are actively involved in promoting a "hot" tumor microenvironment conducive to ICI efficacy.
+The analysis of up-regulated genes shows a strong enrichment in pathways important for responding to immune checkpoint inhibitors. In the Biological Process domain, there is a focus on lymphocyte activation and immune signaling, with very high statistical significance. For Cellular Components, these genes are mostly located in the MHC protein complexes, which are essential for antigen presentation. The Molecular Function results also highlight activities like cytokine receptor activity. This proves that up-regulated genes help create a "hot" tumor microenvironment that improves treatment efficacy.
 <p align="center">
-  <img src="DEA results/GO_up.png" alt="GO Enrichment Up" width="500" height="500"/>
-  <img src="DEA results/GO_down.png" alt="GO Enrichment Down" width="500" height="500"/>
-  <br>
-  <i>
-    Figure 2: Gene Ontology (GO) dot plots illustrating the top enriched terms for up-regulated (left) and down-regulated (right) genes.
-  </i>
+  <img src="DEA results/GO_up.png" alt="GO Enrichment Up" width="500" height="500"/>
+  <img src="DEA results/GO_down.png" alt="GO Enrichment Down" width="500" height="500"/>
+  <br>
+  <i>
+    Figure 2: Gene Ontology (GO) dot plots illustrating the top enriched terms for up-regulated (left) and down-regulated (right) genes.
+  </i>
 </p>
 
-In contrast, the down-regulated genes are primarily associated with metabolic and structural pathways that may characterize non-responsive tumor tissues. The Biological Process domain for these genes is enriched in lipid metabolism and epidermis development, while Cellular Components show significant localization in the extracellular matrix and keratin filaments. Molecular Function analysis reveals a high degree of enrichment in catalytic and structural molecule activities. These findings suggest that the down-regulated gene set reflects altered metabolic states or structural barriers that potentially hinder immune cell infiltration and treatment effectiveness.
+In contrast, down-regulated genes are mostly associated with metabolic and structural pathways in non-responsive tumors. In the Biological Process domain, these genes are related to lipid metabolism and epidermis development. Cellular Components show that these genes are located in the extracellular matrix and keratin filaments. Molecular Function analysis shows enrichment in structural molecule activities. These findings suggest that down-regulated genes may represent structural barriers that prevent immune cells from entering the tumor and making the treatment less effective.
 
 ## 3.3. Feature Selection and SVM-RFE
-The primary objective of this stage was to condense the initial pool of 1,540 DEGs into a highly discriminative subset of features. By employing a two-step process—initial statistical filtering via Chi-square followed by Support Vector Machine-Recursive Feature Elimination (SVM-RFE)—the study sought to identify the most robust biomarkers capable of predicting immunotherapy response with high precision while minimizing model complexity.
+The main goal of this stage was to reduce the 1,540 DEGs into a smaller, highly effective group of features. By using a two-step process—statistical filtering with Chi-square followed by Support Vector Machine-Recursive Feature Elimination (SVM-RFE)—this study identified robust biomarkers to predict immunotherapy response accurately while keeping the model simple.
 
-The analysis of model performance demonstrates that feature reduction significantly influences predictive accuracy and stability. The SVM-RFE algorithm was used to evaluate three distinct feature sets: the Top 4 up-regulated genes, the Top 4 down-regulated genes, and a broader set of the Top 100 DEGs.
-+ The Top 100 DEG model achieved the highest overall performance, with a training accuracy of 0.9047 and a validation accuracy of 0.7971. This model also yielded a superior ROC-AUC of 0.94, indicating exceptional class separation.
-+ The Top 4 up-regulated model, featuring genes such as `KRTDAP, PTPRZ1, RLBP1, and SLC9A3`, showed strong generalizability with a validation accuracy of 0.7963 and a robust AUC of 0.88.
-+ The Top 4 down-regulated model (including `CUX2, SIGLEC8, SPDYC, and SERTM2`) exhibited slightly lower performance, with a validation accuracy of 0.7140 and an AUC of 0.79, suggesting that while down-regulated genes contribute to the signal, up-regulated immune-related features provide more critical predictive weight.
+The results show that reducing features greatly affects predictive accuracy. The SVM-RFE algorithm was used to test three different feature sets: the Top 4 up-regulated genes, the Top 4 down-regulated genes, and a larger set of the Top 100 DEGs.
++ The Top 100 DEG model performed best, with a training accuracy of 0.9047 and a validation accuracy of 0.7971. This model also had a high ROC-AUC of 0.94, showing excellent class separation.
++ The Top 4 up-regulated model, including genes like `KRTDAP, PTPRZ1, RLBP1, and SLC9A3`, showed good performance with a validation accuracy of 0.7963 and an AUC of 0.88.
++ The Top 4 down-regulated model (including `CUX2, SIGLEC8, SPDYC, and SERTM2`) had lower performance, with a validation accuracy of 0.7140 and an AUC of 0.79. This suggests that up-regulated immune genes are more important for prediction than down-regulated genes.
 <p align="center">
-  <img src="DEA results/SVM_RFE.png" alt="SVM-RFE Performance Metrics" width="90%"/>
-  <br>
-  <i>
-    Figure 3: SVM-RFE validation results showing Accuracy (left) and ROC-AUC curves (right) for the selected gene subsets.
-  </i>
+  <img src="DEA results/SVM_RFE.png" alt="SVM-RFE Performance Metrics" width="90%"/>
+  <br>
+  <i>
+    Figure 3: SVM-RFE validation results showing Accuracy (left) and ROC-AUC curves (right) for the selected gene subsets.
+  </i>
 </p>
 
-The identification of these specific "driver genes" marks a transition from broad biological pathways to a localized molecular signature. High-ranking genes such as GSTA3, LCK, and KRTDAP align with the immune-activation signals identified in the previous GO enrichment analysis. This refined feature set—particularly the high-performing Top 100 DEGs—will serve as the finalized input for the XGBoost classifier, where Bayesian Optimization will be applied to further sharpen the model's predictive boundary for clinical response.
+Finding these "driver genes" moves the research from general pathways to a specific molecular signature. High-ranking genes such as GSTA3, LCK, and KRTDAP match the immune signals found in the GO analysis. This refined feature set—especially the Top 100 DEGs—will be the final input for the Random Forest classifier. Bayesian Optimization will then be used to further improve the model's ability to predict clinical response.
 
 ## 3.4. Survival-Associated Biomarker Analysis
-The primary objective of this analysis was to validate the prognostic value of the identified DEGs by intersecting high-ranking features from the SVM-RFE process with survival-associated genes from the TCGA-SKCM cohort. This step ensures that the selected biomarkers are not only predictive of immediate treatment response but also serve as significant indicators of long-term patient survival outcomes.
+The main goal of this analysis was to check the prognostic value of the DEGs by matching top features from SVM-RFE with survival-related genes from the TCGA-SKCM cohort. This step ensures the selected biomarkers can predict both immediate treatment response and long-term patient survival.
 
-The intersection analysis yielded a refined set of eight core survival-related biomarkers: FCRL3, IKZF3, LOXL4, NUGGC, PLA2G2D, POU2AF1, SIRPG, and TNFRSF17. To verify their clinical relevance, a Mann-Whitney U-test was performed, revealing distinct expression patterns between responders (R) and non-responders (NR). For the majority of these genes, significantly higher expression levels were observed in the responder group ($p < 0.05$), reinforcing their role as positive indicators of immunotherapy efficacy.
+This analysis found eight core survival biomarkers: FCRL3, IKZF3, LOXL4, NUGGC, PLA2G2D, POU2AF1, SIRPG, and TNFRSF17. To check their clinical importance, a Mann-Whitney U-test was used. It showed that most of these genes have significantly higher expression in responders (R) than in non-responders (NR) ($p < 0.05$), proving they are positive indicators for immunotherapy success.
 <p align="center">
-  <img src="DEA results/Mann_Whitney.png" alt="Mann Whitney Analysis" width="90%"/>
-  <br>
-  <i>Figure 4: Expression levels of survival-related biomarkers between responders and non-responders validated by Mann-Whitney U-test.
-  </i>
+  <img src="DEA results/Mann_Whitney.png" alt="Mann Whitney Analysis" width="90%"/>
+  <br>
+  <i>Figure 4: Expression levels of survival-related biomarkers between responders and non-responders validated by Mann-Whitney U-test.
+  </i>
 </p>
 
-The prognostic impact of these biomarkers was further quantified using the Cox Proportional Hazards (CPH) model and visualized through Kaplan-Meier plots.
-- Multivariate Cox Regression: The analysis identified several genes as strong independent prognostic factors. FCRL3 ($HR = 0.24$), IKZF3 ($HR = 0.25$), and PLA2G2D ($HR = 0.26$) demonstrated the most significant protective effects, where higher expression levels correlate with a substantially reduced risk of mortality. Conversely, LOXL4 was identified as a significant risk factor ($HR = 1.93, p = 0.046$), suggesting that its up-regulation is associated with poorer survival outcomes.
+The impact of these biomarkers was measured using the Cox Proportional Hazards (CPH) model and Kaplan-Meier plots.
+- Multivariate Cox Regression: Several genes were identified as strong independent factors. FCRL3 ($HR = 0.24$), IKZF3 ($HR = 0.25$), and PLA2G2D ($HR = 0.26$) showed significant protective effects. This means higher expression of these genes relates to a much lower risk of death. In contrast, LOXL4 was a risk factor ($HR = 1.93, p = 0.046$), meaning its high expression is linked to poorer survival.
 <p align="center">
-  <img src="DEA results/Hazard_ratio.png" alt="Hazard Ratio" width="70%"/>
-  <br>
-  <i>
-    Figure 5: Multivariate Cox regression analysis displaying the Hazard Ratios (HR) for the identified survival biomarkers.
-  </i>
+  <img src="DEA results/Hazard_ratio.png" alt="Hazard Ratio" width="70%"/>
+  <br>
+  <i>
+    Figure 5: Multivariate Cox regression analysis displaying the Hazard Ratios (HR) for the identified survival biomarkers.
+  </i>
 </p>
 
-- Kaplan-Meier Survival Evaluation: The survival curves illustrate a clear and significant separation in overall survival (OS) between patients with high and low expression levels of these markers. Specifically, high expression of protective biomarkers—particularly FCRL3, IKZF3, and SIRPG—is associated with extended survival probabilities, whereas high expression of LOXL4 correlates with a steeper decline in survival over time.
+- Kaplan-Meier Survival Evaluation: The curves show a clear difference in overall survival (OS) between patients with high and low expression levels. High expression of protective markers like FCRL3, IKZF3, and SIRPG is linked to longer survival, while high expression of LOXL4 leads to a faster decline in survival.
 <p align="center">
-  <img src="DEA results/Kaplan_meier.png" alt="Kaplan Meier Plot" width="90%"/>
-  <br>
-  <i>
-    Figure 6: Kaplan-Meier survival curves illustrating the differential survival probabilities between high and low expression groups.
-  </i>
+  <img src="DEA results/Kaplan_meier.png" alt="Kaplan Meier Plot" width="90%"/>
+  <br>
+  <i>
+    Figure 6: Kaplan-Meier survival curves illustrating the differential survival probabilities between high and low expression groups.
+  </i>
 </p>
 
 <div align="center">
-  <br>
-  <i>
-    Table 2: Multivariate Cox Regression and Clinical Cutoff Summary
-  </i>
+  <br>
+  <i>
+    Table 2: Multivariate Cox Regression and Clinical Cutoff Summary
+  </i>
 
 | Variable | p-value | Hazard Ratio (HR) | 95% CI (Low) | 95% CI (High) | Cutoff Value |
 | :--- | :---: | :---: | :---: | :---: | :---: |
@@ -107,46 +108,44 @@ The prognostic impact of these biomarkers was further quantified using the Cox P
 | **TNFRSF17** | 0.103150 | 0.51 | 0.22 | 1.15 | 1.5887 |
 </div>
 
-## 3.5. Comparative Performance Analysis: 
-The primary objective of this final stage was to evaluate the predictive power of the Random Forest Classifier (RFC) across different feature sets. By comparing a model based on clinical features (RFC_7) with those trained on survival-associated genes (RFC-SURV), top sequential features (RFC-SEQ), and a combined set (RFC-16), the study aimed to identify the most parsimonious yet accurate molecular signature for predicting immunotherapy response.
+## 3.5. Comparative Performance Analysis: 
+The goal of this final stage was to test the predictive power of the Random Forest Classifier (RFC) using different feature sets. We compared a model using clinical features (RFC_7) with models using survival genes (RFC-SURV), top sequential features (RFC-SEQ), and a combined set (RFC-16).
 
-The performance analysis indicates that while clinical features provide a stable baseline, integrating survival-related and discriminative sequential genes yields significantly more robust results.
-+ RFC_7 (Clinical Baseline): This model utilized 7 clinical features, including Mutation Count, TMB, and Fraction Genome Altered. It achieved a mean bootstrap accuracy of 0.8031 (95% CI: 0.6829-0.9024). However, despite the high accuracy, it showed a limited recall of 0.3333, precision of 0.60, and an AUC of 0.5556, reflecting the difficulty of predicting response using only non-transcriptomic data.
-+ RFC-SURV: Utilizing the 8 survival-related biomarkers, this model achieved a mean bootstrap accuracy of 0.7383 (95% CI: 0.5556-0.8889). While it maintains a high recall (0.85), its AUC of 0.75 suggests that survival signals alone, though prognostic, may require additional discriminative features for optimal classification.
-+ RFC-SEQ: Based on the top 8 sequential features from SVM-RFE, this model showed a mean accuracy of 0.7076 (95% CI: 0.5185-0.8889). Notably, it achieved a perfect precision of 1.0, with an improved AUC of 0.8286, driven largely by the heavy feature importance of SERTM2.
-+ RFC-16 (Combined): By combining both feature sets, the RFC-16 model reached the highest stability and accuracy, with a mean bootstrap estimate of 0.7792 (95% CI: 0.6296-0.9259). This model achieved a superior AUC of 0.8571, demonstrating that the synergy between prognostic (survival) and diagnostic (sequential) genes enhances the model's ability to distinguish responders.
+The results show that while clinical features are stable, adding survival and sequential genes makes the model much stronger.
++ RFC_7 (Clinical Baseline): This model used 7 clinical features like Mutation Count and TMB. It reached an accuracy of 0.8031, but had low recall (0.33) and a low AUC (0.55). This shows that clinical data alone is not enough to predict response accurately.
++ RFC-SURV: Using 8 survival biomarkers, this model achieved 0.7383 accuracy. It has a high recall (0.85), but the AUC of 0.75 suggests it needs more features for better classification.
++ RFC-SEQ: Based on the top 8 features from SVM-RFE, this model had a mean accuracy of 0.7076. It achieved a perfect precision of 1.0 and a better AUC of 0.8286, mostly because of the importance of the SERTM2 gene.
++ RFC-16 (Combined): By combining both sets, the RFC-16 model was the most stable and accurate (mean accuracy 0.7792). It reached a superior AUC of 0.8571, proving that using both prognostic and diagnostic genes helps the model identify responders better.
 <div align="center">
-  <img src="DEA results/RFC7.png" alt="RFC7 Baseline Performance" width="85%"/>
-  <br>
-  <i>
-    Figure 7: Feature importance and metrics for the RFC_7 clinical baseline model.
-  </i>
+  <img src="DEA results/RFC7.png" alt="RFC7 Baseline Performance" width="85%"/>
+  <br>
+  <i>
+    Figure 7: Feature importance and metrics for the RFC_7 clinical baseline model.
+  </i>
 </div>
 
-
 <div align="center">
-  <img src="DEA results/ROC_AUC_1.png" alt="ROC Results Comparison" width="70%"/>
-  <br>
-  <i>
-    Figure 8: ROC Curve comparison across RFC-SURV, RFC-SEQ, and RFC-16 models.
-  </i>
+  <img src="DEA results/ROC_AUC_1.png" alt="ROC Results Comparison" width="70%"/>
+  <br>
+  <i>
+    Figure 8: ROC Curve comparison across RFC-SURV, RFC-SEQ, and RFC-16 models.
+  </i>
 </div>
 
-
-Feature Importance Analysis across the models highlights a shift in predictive drivers. In RFC_7, the most influential factors were Mutation Count (0.1895) and TMB (0.1740). In contrast, the RFC-16 model is driven by biological markers where SERTM2 accounts for over 32% of the total feature score, followed by SLC9A3 and RLBP1. The consistent high ranking of these genes underscores their biological relevance in the melanoma tumor microenvironment.
+Feature Importance Analysis shows that in the RFC-16 model, biological markers are the main drivers. SERTM2 alone accounts for over 32% of the feature score. The high rank of these genes confirms they are very relevant in the melanoma tumor microenvironment.
 <div align="center">
-  <img src="DEA results/Feature_importance_1.png" alt="Feature Importance Results" width="90%"/>
-  <br>
-  <i>
-    Figure 9: Relative feature importance scores for RFC-SURV, RFC-16, and RFC-SEQ.
-  </i>
+  <img src="DEA results/Feature_importance_1.png" alt="Feature Importance Results" width="90%"/>
+  <br>
+  <i>
+    Figure 9: Relative feature importance scores for RFC-SURV, RFC-16, and RFC-SEQ.
+  </i>
 </div>
-  
+  
 <div align="center">
 <br>
-   <i>
-     Table 3: Comparative Performance Summary of RFC Models
-   </i>
+   <i>
+     Table 3: Comparative Performance Summary of RFC Models
+   </i>
 
 | Model | Mean Accuracy (95% CI) | Precision | Recall | F1-Score | AUC |
 | :--- | :---: | :---: | :---: | :---: | :---: |
@@ -156,16 +155,16 @@ Feature Importance Analysis across the models highlights a shift in predictive d
 | **RFC-16** | 0.7792 (0.6296 - 0.9259) | **1.0000** | 0.7000 | 0.8235 | **0.8571** |
 </div>
 
-
-In conclusion, while the RFC_7 model offers high overall accuracy, the RFC-16 model provides a much more effective balance of precision and sensitivity. The superior AUC and perfect precision on test sets suggest that this 16-gene signature is the most powerful candidate for clinical decision-making in melanoma immunotherapy.
+In conclusion, the RFC-16 model is much more effective than the RFC_7 model. Its high AUC and perfect precision make the 16-gene signature the best candidate for clinical use in melanoma treatment.
 
 # 4. CONCLUSION
-This project successfully developed a high-performance computational framework to predict immunotherapy response in melanoma patients through the following key outcomes:
-- Identification of Molecular Signatures: Differential Expression Analysis (DEA) identified 1,540 genes with significant expression shifts, primarily enriched in lymphocyte activation and MHC protein complex pathways.
-- Prognostic Validation: A core set of 8 survival-related biomarkers (e.g., FCRL3, IKZF3, PLA2G2D) was confirmed as critical protective factors with Hazard Ratios (HR) below 0.3.
-- Model Optimization: While the clinical baseline model (RFC_7) achieved a stable 81% accuracy, it demonstrated poor sensitivity with a low recall of 0.33 in identifying treatment responders.
-- Superiority of RFC-16: The combined 16-gene model (RFC-16) proved to be the most effective architecture, achieving an AUC of 0.8571 and a perfect precision of 1.0, successfully overcoming the class imbalance issues inherent in clinical data.
-- Potential Biomarker Insights: The dominant predictive weight of the SERTM2 gene (over 32% of feature importance) highlights its potential as a focal point for future diagnostic assays and targeted therapies.
+This project developed a high-performance framework to predict immunotherapy response in melanoma patients:
+- Identification of Molecular Signatures: DEA identified 1,540 genes related to immune pathways like lymphocyte activation.
+- Prognostic Validation: Eight survival biomarkers (e.g., FCRL3, IKZF3) were confirmed as protective factors with Hazard Ratios (HR) below 0.3.
+- Model Optimization: The clinical baseline model (RFC_7) had poor sensitivity (0.33 recall), but the RFC-16 model performed much better.
+- Superiority of RFC-16: The 16-gene model (RFC-16) achieved an AUC of 0.8571 and perfect precision (1.0), effectively identifying treatment responders.
+- Potential Biomarker Insights: The high importance of the SERTM2 gene (32%) highlights its potential for future diagnostic tools and therapies.
+
 
 
 
