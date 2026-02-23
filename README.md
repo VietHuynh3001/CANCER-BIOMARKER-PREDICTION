@@ -5,7 +5,7 @@ This project aims to identify high-potential melanoma biomarkers through an adva
 
 # 2. METHOD:
 ## 2.1. DATA RETRIEVAL AND PREPROCESSING:
-Clinical and transcriptomic data of melanoma patients treated with ICIs were retrieved from cBioPortal and GEO. Patients were classified as responders or non-responders. Differential Expression Analysis (DEA) was performed using the pydeseq2 library, with significance defined as an adjusted p-value < 0.05 and |log2FC| > 1.0.
+Clinical and transcriptomic data of melanoma patients treated with ICIs were retrieved from cBioPortal and GEO. Patients were classified as responders or non-responders. DEA was performed using the pydeseq2 library, with significance defined as an adjusted p-value < 0.05 and |log2FC| > 1.0.
 ## 2.2. TWO-STAGE FEATURE SELECTION:
 To refine the feature set, a two-stage selection process was implemented:
 + Stage 1: Chi-square Test: A statistical filter was applied to remove genes whose expression levels showed no significant association with clinical response.
@@ -13,7 +13,7 @@ To refine the feature set, a two-stage selection process was implemented:
 ## 2.3. SURVIVAL-ASSOCIATED BIOMARKER ANALYSIS:
 High-ranking DEGs from SVM-RFE were intersected with survival-related genes from the TCGA-SKCM cohort. The Mann-Whitney U-test was performed to compare the expression levels of these survival-related genes between responders and non-responders. The Cox proportional hazard model then assessed the independent impact of these genes on overall survival. Kaplan-Meier plots were generated to visualize survival probability differences between high and low expression groups.
 ## 2.4. GENE ONTOLOGY ENRICHMENT ANALYSIS:
-Functional enrichment analysis was performed using the clusterProfiler package to explore Biological Processes, Molecular Functions, and Cellular Components. A significance threshold of adjusted p-value < 0.05 was applied to identify immune-related pathways.
+Functional enrichment analysis was performed using the clusterProfiler package to explore Biological Processes (BP), Molecular Functions (MF), and Cellular Components (CC). A significance threshold of adjusted p-value < 0.05 was applied to identify immune-related pathways.
 ## 2.5. RANDOM FOREST MODEL AND BAYESIAN OPTIMIZATION:
 Predictive models were constructed using the Random Forest algorithm to capture complex biological signals. To prevent overfitting and maximize the Area Under the Curve (AUC), Bayesian Optimization was utilized via BayesSearchCV to tune critical hyperparameters, including n_estimators, max_depth, and min_samples_split.
 
@@ -44,7 +44,7 @@ The analysis of up-regulated genes shows a strong enrichment in pathways importa
 In contrast, down-regulated genes are mostly associated with metabolic and structural pathways in non-responsive tumors. In the Biological Process domain, these genes are related to lipid metabolism and epidermis development. Cellular Components show that these genes are located in the extracellular matrix and keratin filaments. Molecular Function analysis shows enrichment in structural molecule activities. These findings suggest that down-regulated genes may represent structural barriers that prevent immune cells from entering the tumor and making the treatment less effective.
 
 ## 3.3. Feature Selection and SVM-RFE
-The main goal of this stage was to reduce the 1,540 DEGs into a smaller, highly effective group of features. By using a two-step process—statistical filtering with Chi-square followed by Support Vector Machine-Recursive Feature Elimination (SVM-RFE)—this study identified robust biomarkers to predict immunotherapy response accurately while keeping the model simple.
+The main goal of this stage was to reduce the 1,540 DEGs into a smaller, highly effective group of features. By using a two-step process—statistical filtering with Chi-square followed by Support Vector Machine-Recursive Feature Elimination (SVM-RFE), this study identified robust biomarkers to predict immunotherapy response accurately while keeping the model simple.
 
 The results show that reducing features greatly affects predictive accuracy. The SVM-RFE algorithm was used to test three different feature sets: the Top 4 up-regulated genes, the Top 4 down-regulated genes, and a larger set of the Top 100 DEGs.
 + The Top 100 DEG model performed best, with a training accuracy of 0.9047 and a validation accuracy of 0.7971. This model also had a high ROC-AUC of 0.94, showing excellent class separation.
@@ -109,13 +109,13 @@ The impact of these biomarkers was measured using the Cox Proportional Hazards (
 </div>
 
 ## 3.5. Comparative Performance Analysis: 
-The goal of this final stage was to test the predictive power of the Random Forest Classifier (RFC) using different feature sets. We compared a model using clinical features (RFC_7) with models using survival genes (RFC-SURV), top sequential features (RFC-SEQ), and a combined set (RFC-16).
+The goal of this final stage was to test the predictive power of the Random Forest Classifier (RFC) using different feature sets. A model using clinical features (RFC_7) was compared with models using survival genes (RFC-SURV), top sequential features (RFC-SEQ), and a combined set (RFC-16).
 
 The results show that while clinical features are stable, adding survival and sequential genes makes the model much stronger.
-+ RFC_7 (Clinical Baseline): This model used 7 clinical features like Mutation Count and TMB. It reached an accuracy of 0.8031, but had low recall (0.33) and a low AUC (0.55). This shows that clinical data alone is not enough to predict response accurately.
-+ RFC-SURV: Using 8 survival biomarkers, this model achieved 0.7383 accuracy. It has a high recall (0.85), but the AUC of 0.75 suggests it needs more features for better classification.
++ RFC_7: This model used 7 clinical features like Mutation Count and TMB. It reached an accuracy of 0.8031, but had low recall of 0.33 and a low AUC of 0.55. This shows that clinical data alone is not enough to predict response accurately.
++ RFC-SURV: Using 8 survival biomarkers, this model achieved an accuracy of 0.7383. It has a high recall of 0.85, but the AUC of 0.75 suggests it needs more features for better classification.
 + RFC-SEQ: Based on the top 8 features from SVM-RFE, this model had a mean accuracy of 0.7076. It achieved a perfect precision of 1.0 and a better AUC of 0.8286, mostly because of the importance of the SERTM2 gene.
-+ RFC-16 (Combined): By combining both sets, the RFC-16 model was the most stable and accurate (mean accuracy 0.7792). It reached a superior AUC of 0.8571, proving that using both prognostic and diagnostic genes helps the model identify responders better.
++ RFC-16: By combining both sets, the RFC-16 model was the most stable and accurate with a mean accuracy of 0.7792. It reached a superior AUC of 0.8571, proving that using both prognostic and diagnostic genes helps the model identify responders better.
 <div align="center">
   <img src="DEA results/RFC7.png" alt="RFC7 Baseline Performance" width="85%"/>
   <br>
@@ -160,10 +160,11 @@ In conclusion, the RFC-16 model is much more effective than the RFC_7 model. Its
 # 4. CONCLUSION
 This project developed a high-performance framework to predict immunotherapy response in melanoma patients:
 - Identification of Molecular Signatures: DEA identified 1,540 genes related to immune pathways like lymphocyte activation.
-- Prognostic Validation: Eight survival biomarkers (e.g., FCRL3, IKZF3) were confirmed as protective factors with Hazard Ratios (HR) below 0.3.
-- Model Optimization: The clinical baseline model (RFC_7) had poor sensitivity (0.33 recall), but the RFC-16 model performed much better.
-- Superiority of RFC-16: The 16-gene model (RFC-16) achieved an AUC of 0.8571 and perfect precision (1.0), effectively identifying treatment responders.
-- Potential Biomarker Insights: The high importance of the SERTM2 gene (32%) highlights its potential for future diagnostic tools and therapies.
+- Prognostic Validation: Eight survival biomarkers (e.g., FCRL3, IKZF3) were confirmed as protective factors with Hazard Ratios below 0.3.
+- Model Optimization: RFC_7 model had poor sensitivity (0.33 recall), but the RFC-16 model performed much better.
+- Superiority of RFC-16: RFC-16 model achieved an AUC of 0.8571 and perfect precision (1.0), effectively identifying treatment responders.
+- Potential Biomarker Insights: The high importance of the SERTM2 gene (0.32) highlights its potential for future diagnostic tools and therapies.
+
 
 
 
